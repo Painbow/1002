@@ -5,15 +5,15 @@
 # https://api.data.gov.sg/v1/transport/carpark-availability?date_time=2021-10-07T20%3A34%3A27%2B08%3A00
 
 import requests
+import json
+import pandas
+import testFunctions
+import tablecreation
+from tkinter import *
+from pandastable import Table
 
-# prints output of an API call
-# r is bytes class
-url = "https://api.data.gov.sg/v1/transport/carpark-availability?date_time=2021-10-07T20%3A34%3A27%2B08%3A00"
-r = requests.get(url)
 
-eval(r.content.decode("utf-8"))
+outputJson = testFunctions.getOutput("https://data.gov.sg/api/action/datastore_search?resource_id=139a3035-e624-4f56-b63f-89ae28d4ae4c&q=woodlands")
+dataframe = pandas.json_normalize(outputJson["result"]["records"])
 
-
-# {"items":[{"timestamp":"2021-10-07T20:34:26+08:00", "carpark_data": [
-# {"carpark_info":[{"total_lots":"105","lot_type":"C","lots_available":"26"}],"carpark_number":"HE12","update_datetime":"2021-10-07T20:15:41"},
-# {"carpark_info":[{"total_lots":"583","lot_type":"C","lots_available":"411"}],"carpark_number":"HLM","update_datetime":"2021-10-07T20:15:25"},
+tablecreation.LoadTable(dataframe)
