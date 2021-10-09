@@ -2,6 +2,8 @@ import tkinter
 from tkinter import *
 from pandastable import Table
 
+#loads dataframe into a table
+
 def LoadTable(x):
 
     root = tkinter.Tk()

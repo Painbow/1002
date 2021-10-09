@@ -21,6 +21,7 @@ def lotAvail(x):
 def upTime(x):
     return output["items"][0]["carpark_data"][x]["carpark_info"][0]["lots_available"]
 
+# gets output from API call
 def getOutput(x):
     r = requests.get(x)
     return json.loads(r.content)
