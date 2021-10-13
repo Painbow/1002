@@ -10,6 +10,7 @@ from PyQt5.QtWidgets import QApplication, QTableView
 from PyQt5.QtCore import QAbstractTableModel, Qt
 import psutil
 
+# generates table from pandas dataframe
 class pandasModel(QAbstractTableModel):
 
     def __init__(self, data):
@@ -32,7 +33,9 @@ class pandasModel(QAbstractTableModel):
         if orientation == Qt.Horizontal and role == Qt.DisplayRole:
             return self._data.columns[col]
         return None
+    
 
+# output from Qt Designer (GUI)
 
 class Ui_MainWindow(object):
 
@@ -151,6 +154,8 @@ class Ui_MainWindow(object):
         self.text_label.setText(_translate("MainWindow", "Filter by keywords:"))
         self.tab_menu.setTabText(self.tab_menu.indexOf(self.tab_2), _translate("MainWindow", "Refine search"))
 
+# To handle user inputs such as button clicks, text box entries
+
     def radio1_clicked(self):
         if self.radioButton_1.isChecked():
             global freeparking
@@ -176,6 +181,7 @@ class Ui_MainWindow(object):
             global carparkType
             carparkType="SURFACE CAR PARK"
 
+# filtering from NormanTest
     def accept(self):
         area = (self.text_box.toPlainText()).replace(" ", "%20")
         print(carparkType)
@@ -224,6 +230,8 @@ class Ui_MainWindow(object):
                 carpark['total_lot'] = availStatus[0]['total_lots']
                 carpark['lot_type'] = availStatus[0]['lot_type']
                 carpark['lot_available'] = availStatus[0]['lots_available']
+
+# displays table with filtered data
 
         dataframe = pandas.json_normalize(recordList)
         model = pandasModel(dataframe)
