@@ -1,18 +1,23 @@
-# Example date_time parameter
-# 2021-10-07T20:34:27+08:00
-
-# Example request
-# https://api.data.gov.sg/v1/transport/carpark-availability?date_time=2021-10-07T20%3A34%3A27%2B08%3A00
-
-import requests
-import json
-import pandas
 import testFunctions
-import tablecreation
-from tkinter import *
-from pandastable import Table
+import normanFunc
+import pandas
+import json
+import sys
+import MainWindow
+from MainWindow import Ui_MainWindow
+import PyQt5
+from PyQt5 import QtCore, QtGui, QtWidgets, uic
+from PyQt5.QtWidgets import QApplication, QTableView
+from PyQt5.QtCore import QAbstractTableModel, Qt
 
-outputJson = testFunctions.getOutput("https://data.gov.sg/api/action/datastore_search?resource_id=139a3035-e624-4f56-b63f-89ae28d4ae4c&q=woodlands")
-dataframe = pandas.json_normalize(outputJson["result"]["records"])
+class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
+    def __init__(self, *args, obj=None, **kwargs):
+        super(MainWindow, self).__init__(*args, **kwargs)
+        self.setupUi(self)
 
-tablecreation.LoadTable(dataframe)
+# Load menu
+app = QtWidgets.QApplication(sys.argv)
+
+window = MainWindow()
+window.show()
+sys.exit(app.exec_())
