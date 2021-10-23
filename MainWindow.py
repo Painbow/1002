@@ -246,8 +246,14 @@ class Ui_MainWindow(object):
         view.setWindowTitle("Carparks")
         view.resize(1920, 1080)
         # clicking on a table row returns Y and X coordinates of that row
-        view.clicked.connect(lambda:print(((view.selectionModel().currentIndex()).sibling(view.selectionModel().currentIndex().row(), 2).data()), ((view.selectionModel().currentIndex()).sibling(view.selectionModel().currentIndex().row(), 3).data())))
+        ###Norman attempt
+
+        view.doubleClicked.connect(lambda:clickfunc(((view.selectionModel().currentIndex()).sibling(view.selectionModel().currentIndex().row(), 2).data()), ((view.selectionModel().currentIndex()).sibling(view.selectionModel().currentIndex().row(), 3).data())))
+        ###
+        # view.clicked.connect(lambda:print(((view.selectionModel().currentIndex()).sibling(view.selectionModel().currentIndex().row(), 2).data()), ((view.selectionModel().currentIndex()).sibling(view.selectionModel().currentIndex().row(), 3).data())))
         header = view.horizontalHeader()
         header.setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
         view.show()
 
+def clickfunc(y,x):
+    Functions.openlink(y,x)
