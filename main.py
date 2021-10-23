@@ -1,9 +1,4 @@
-import Functions
-import normanFunc
-import pandas
-import json
 import sys
-import requests
 import MainWindow
 from MainWindow import Ui_MainWindow
 import PyQt5
