@@ -1,9 +1,6 @@
 from datetime import datetime
 import requests
 import json
-import onemapsg
-from onemapsg import OneMapClient
-from scipy import spatial
 import webbrowser
 import pyproj
 from pyproj import Transformer
