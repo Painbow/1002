@@ -7,6 +7,8 @@ from pyproj import Transformer
 from datetime import datetime , timedelta
 import matplotlib.pyplot as plt
 
+carparkAvailUrl = "https://api.data.gov.sg/v1/transport/carpark-availability?"
+
 def getOutput(x):
     r = requests.get(x)
     return json.loads(r.content)
