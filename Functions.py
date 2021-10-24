@@ -7,9 +7,6 @@ from pyproj import Transformer
 from datetime import datetime , timedelta
 import matplotlib.pyplot as plt
 
-resource_id = "139a3035-e624-4f56-b63f-89ae28d4ae4c"
-carparkAvailUrl = "https://api.data.gov.sg/v1/transport/carpark-availability?"
-carparkInfoUrl = "https://data.gov.sg/api/action/datastore_search?resource_id="
 def getOutput(x):
     r = requests.get(x)
     return json.loads(r.content)
