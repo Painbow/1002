@@ -7,8 +7,9 @@ from pyproj import Transformer
 from datetime import datetime , timedelta
 import matplotlib.pyplot as plt
 
+resource_id = "139a3035-e624-4f56-b63f-89ae28d4ae4c"
 carparkAvailUrl = "https://api.data.gov.sg/v1/transport/carpark-availability?"
-
+carparkInfoUrl = "https://data.gov.sg/api/action/datastore_search?resource_id="
 def getOutput(x):
     r = requests.get(x)
     return json.loads(r.content)
@@ -35,12 +36,13 @@ def getCurrentTime():
 def openlink(y1, x1):
 
     # yCoord, xCoord = 103.8846673,1.3213042
-    yCoord, xCoord = convertXYToLatLong(y1, x1)
+    xfm = pyproj.Transformer.from_crs('EPSG:3414', 'EPSG:4326', always_xy=True)
+    yCoord, xCoord = xfm.transform(x1, y1)
     webbrowser.open('https://www.google.com/maps/search/' + str(xCoord) + ',' + str(yCoord))
 
 # Converts the x & y coordinates to longitude & latitude to be used for google map search
 def convertXYToLatLong(y1, x1):
-    transformer = Transformer.from_crs('epsg:3414', 'epsg:4757', always_xy=True)
+    transformer = Transformer.from_crs('epsg:3414', 'epsg:4326', always_xy=True)
     return transformer.transform(y1, x1)
 
 
