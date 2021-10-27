@@ -151,6 +151,7 @@ class Ui_MainWindow(object):
         self.text_label_2.setText(_translate("MainWindow", "Retrieve data from the past: "))
         self.text_label_3.setText(_translate("MainWindow", "days"))
         self.text_label_4.setText(_translate("MainWindow", "Carpark to retrieve data from:"))
+        self.text_box_1.setPlainText(_translate("MainWindow", "Woodlands"))
         self.text_box_2.setPlainText(_translate("MainWindow", "5"))
         self.text_box_3.setPlainText(_translate("MainWindow", "HE12"))
         self.tab_menu.setTabText(self.tab_menu.indexOf(self.tab_2), _translate("MainWindow", "Carpark Availability Graph"))
@@ -262,12 +263,21 @@ class Ui_MainWindow(object):
             view.show()
 
         except:
-            msg = QMessageBox()
-            msg.setIcon(QMessageBox.Critical)
-            msg.setText("Error")
-            msg.setInformativeText('Invalid Input')
-            msg.setWindowTitle("Error")
-            msg.exec_()
+            if (self.text_box_1.toPlainText()).isalnum() is False:
+                msg = QMessageBox()
+                msg.setIcon(QMessageBox.Critical)
+                msg.setText("Error")
+                msg.setInformativeText('Invalid Input')
+                msg.setWindowTitle("Error")
+                msg.exec_()
+
+            else:
+                msg = QMessageBox()
+                msg.setIcon(QMessageBox.Critical)
+                msg.setText("Error")
+                msg.setInformativeText('There are no carparks to display for this location, please try another location')
+                msg.setWindowTitle("Error")
+                msg.exec_()
 
     def accept2(self):
         try:
