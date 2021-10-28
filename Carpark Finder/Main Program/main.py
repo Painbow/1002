@@ -1,4 +1,3 @@
-import sys
 import MainWindow
 from MainWindow import Ui_MainWindow
 import PyQt5
@@ -17,4 +16,4 @@ app = QtWidgets.QApplication(sys.argv)
 window = MainWindow()
 window.setWindowTitle("Menu")
 window.show()
-sys.exit(app.exec_())
+app.exec_()
