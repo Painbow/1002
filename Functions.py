@@ -74,7 +74,6 @@ def getCarparkAvailAtTime(listOfTime,carparkNo):
 
 def plotGraph(title,xlabel,ylabel,xvalue,yvalue):
     plt.plot(xvalue, yvalue)
-    xlabel = xlabel.replace
     plt.xlabel(xlabel)
     plt.ylabel(ylabel)
     plt.title(title)
