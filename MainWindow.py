@@ -11,7 +11,12 @@ from PyQt5.QtCore import QAbstractTableModel, Qt
 from PyQt5.QtWidgets import QMessageBox
 
 resource_id = "139a3035-e624-4f56-b63f-89ae28d4ae4c"
-carparkinfo = "https://data.gov.sg/api/action/datastore_search?resource_id=" + resource_id + "&q="
+
+checkLimit = "https://data.gov.sg/api/action/datastore_search?resource_id=" + resource_id + "&limit=1"
+checkLimitJson = Functions.getOutput(checkLimit)
+maxLimit = checkLimitJson["result"]["total"]
+
+carparkinfo = "https://data.gov.sg/api/action/datastore_search?resource_id=" + resource_id + "&limit=" + str(maxLimit)
 carparkInfoJson = Functions.getOutput(carparkinfo)
 
 global carparkType
@@ -48,6 +53,7 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName("centralwidget")
         self.tab_menu = QtWidgets.QTabWidget(self.centralwidget)
         self.tab_menu.setGeometry(QtCore.QRect(0, 0, 801, 601))
+        self.tab_menu.setIconSize(QtCore.QSize(16, 16))
         self.tab_menu.setObjectName("tab_menu")
         self.tab_1 = QtWidgets.QWidget()
         self.tab_1.setContextMenuPolicy(QtCore.Qt.ActionsContextMenu)
@@ -72,25 +78,26 @@ class Ui_MainWindow(object):
         self.ok_button_1.setStandardButtons(QtWidgets.QDialogButtonBox.Ok)
         self.ok_button_1.setObjectName("ok_button_1")
         self.radioButton_1 = QtWidgets.QRadioButton(self.tab_1)
-        self.radioButton_1.setGeometry(QtCore.QRect(20, 10, 191, 17))
+        self.radioButton_1.setGeometry(QtCore.QRect(20, 20, 191, 17))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.radioButton_1.setFont(font)
         self.radioButton_1.setObjectName("radioButton_1")
         self.radioButton_2 = QtWidgets.QRadioButton(self.tab_1)
-        self.radioButton_2.setGeometry(QtCore.QRect(20, 30, 211, 17))
+        self.radioButton_2.setGeometry(QtCore.QRect(20, 40, 211, 17))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.radioButton_2.setFont(font)
         self.radioButton_2.setObjectName("radioButton_2")
         self.radioButton_3 = QtWidgets.QRadioButton(self.tab_1)
-        self.radioButton_3.setGeometry(QtCore.QRect(20, 50, 291, 17))
+        self.radioButton_3.setGeometry(QtCore.QRect(20, 60, 291, 17))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.radioButton_3.setFont(font)
         self.radioButton_3.setObjectName("radioButton_3")
         self.text_box_1 = QtWidgets.QPlainTextEdit(self.tab_1)
         self.text_box_1.setGeometry(QtCore.QRect(20, 160, 351, 31))
+        self.text_box_1.setPlainText("")
         self.text_box_1.setObjectName("text_box_1")
         self.tab_menu.addTab(self.tab_1, "")
         self.tab_2 = QtWidgets.QWidget()
@@ -127,6 +134,96 @@ class Ui_MainWindow(object):
         self.text_box_3.setGeometry(QtCore.QRect(200, 100, 71, 31))
         self.text_box_3.setObjectName("text_box_3")
         self.tab_menu.addTab(self.tab_2, "")
+        self.tab_3 = QtWidgets.QWidget()
+        self.tab_3.setObjectName("tab_3")
+        self.text_label_5 = QtWidgets.QLabel(self.tab_3)
+        self.text_label_5.setGeometry(QtCore.QRect(20, 10, 171, 20))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.text_label_5.setFont(font)
+        self.text_label_5.setObjectName("text_label_5")
+        self.text_label_6 = QtWidgets.QLabel(self.tab_3)
+        self.text_label_6.setGeometry(QtCore.QRect(20, 40, 181, 20))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.text_label_6.setFont(font)
+        self.text_label_6.setObjectName("text_label_6")
+        self.text_label_7 = QtWidgets.QLabel(self.tab_3)
+        self.text_label_7.setGeometry(QtCore.QRect(20, 70, 201, 20))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.text_label_7.setFont(font)
+        self.text_label_7.setObjectName("text_label_7")
+        self.text_label_8 = QtWidgets.QLabel(self.tab_3)
+        self.text_label_8.setGeometry(QtCore.QRect(20, 120, 251, 20))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.text_label_8.setFont(font)
+        self.text_label_8.setObjectName("text_label_8")
+        self.text_label_9 = QtWidgets.QLabel(self.tab_3)
+        self.text_label_9.setGeometry(QtCore.QRect(20, 150, 291, 20))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.text_label_9.setFont(font)
+        self.text_label_9.setObjectName("text_label_9")
+        self.text_label_10 = QtWidgets.QLabel(self.tab_3)
+        self.text_label_10.setGeometry(QtCore.QRect(20, 180, 271, 20))
+        font = QtGui.QFont()
+        font.setPointSize(10)
+        self.text_label_10.setFont(font)
+        self.text_label_10.setObjectName("text_label_10")
+        self.text_label_11 = QtWidgets.QLabel(self.tab_3)
+        self.text_label_11.setGeometry(QtCore.QRect(330, 10, 61, 20))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.text_label_11.setFont(font)
+        self.text_label_11.setObjectName("text_label_11")
+        self.text_label_12 = QtWidgets.QLabel(self.tab_3)
+        self.text_label_12.setGeometry(QtCore.QRect(330, 40, 61, 20))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.text_label_12.setFont(font)
+        self.text_label_12.setObjectName("text_label_12")
+        self.text_label_13 = QtWidgets.QLabel(self.tab_3)
+        self.text_label_13.setGeometry(QtCore.QRect(330, 70, 61, 20))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.text_label_13.setFont(font)
+        self.text_label_13.setObjectName("text_label_13")
+        self.text_label_14 = QtWidgets.QLabel(self.tab_3)
+        self.text_label_14.setGeometry(QtCore.QRect(330, 120, 61, 20))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.text_label_14.setFont(font)
+        self.text_label_14.setObjectName("text_label_14")
+        self.text_label_15 = QtWidgets.QLabel(self.tab_3)
+        self.text_label_15.setGeometry(QtCore.QRect(330, 150, 61, 20))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.text_label_15.setFont(font)
+        self.text_label_15.setObjectName("text_label_15")
+        self.text_label_16 = QtWidgets.QLabel(self.tab_3)
+        self.text_label_16.setGeometry(QtCore.QRect(330, 180, 61, 20))
+        font = QtGui.QFont()
+        font.setPointSize(12)
+        font.setBold(True)
+        font.setWeight(75)
+        self.text_label_16.setFont(font)
+        self.text_label_16.setObjectName("text_label_16")
+        self.pushButton = QtWidgets.QPushButton(self.tab_3)
+        self.pushButton.setGeometry(QtCore.QRect(20, 230, 75, 23))
+        self.pushButton.setObjectName("pushButton")
+        self.tab_menu.addTab(self.tab_3, "")
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -138,6 +235,7 @@ class Ui_MainWindow(object):
         self.radioButton_3.toggled.connect(self.radio3_clicked)
         self.ok_button_1.clicked.connect(self.accept)
         self.ok_button_2.clicked.connect(self.accept2)
+        self.pushButton.clicked.connect(self.accept3)
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -151,10 +249,23 @@ class Ui_MainWindow(object):
         self.text_label_2.setText(_translate("MainWindow", "Retrieve data from the past: "))
         self.text_label_3.setText(_translate("MainWindow", "days"))
         self.text_label_4.setText(_translate("MainWindow", "Carpark to retrieve data from:"))
-        self.text_box_1.setPlainText(_translate("MainWindow", "Woodlands"))
         self.text_box_2.setPlainText(_translate("MainWindow", "5"))
         self.text_box_3.setPlainText(_translate("MainWindow", "HE12"))
         self.tab_menu.setTabText(self.tab_menu.indexOf(self.tab_2), _translate("MainWindow", "Carpark Availability Graph"))
+        self.text_label_5.setText(_translate("MainWindow", "Number of surface carparks:"))
+        self.text_label_6.setText(_translate("MainWindow", "Number of sheltered carparks:"))
+        self.text_label_7.setText(_translate("MainWindow", "Percentage of sheltered carparks:"))
+        self.text_label_8.setText(_translate("MainWindow", "Number of carparks that offer free parking:"))
+        self.text_label_9.setText(_translate("MainWindow", "Number of carparks that do not offer free parking:"))
+        self.text_label_10.setText(_translate("MainWindow", "Percentage of carparks that offer free parking:"))
+        self.text_label_11.setText(_translate("MainWindow", "-"))
+        self.text_label_12.setText(_translate("MainWindow", "-"))
+        self.text_label_13.setText(_translate("MainWindow", "-%"))
+        self.text_label_14.setText(_translate("MainWindow", "-"))
+        self.text_label_15.setText(_translate("MainWindow", "-"))
+        self.text_label_16.setText(_translate("MainWindow", "-%"))
+        self.pushButton.setText(_translate("MainWindow", "Fetch"))
+        self.tab_menu.setTabText(self.tab_menu.indexOf(self.tab_3), _translate("MainWindow", "Statistics"))
 
     def radio1_clicked(self):
         if self.radioButton_1.isChecked():
@@ -173,15 +284,15 @@ class Ui_MainWindow(object):
 
     def accept(self):
         try:
-            area = str(self.text_box_1.toPlainText())
             result = carparkInfoJson['result']
-            recordList = result['records']
+            record_list = result['records']
+            area = str(self.text_box_1.toPlainText()).replace(" ", "%20")
 
             if area != "":
                 carparkinfo2 = "https://data.gov.sg/api/action/datastore_search?resource_id=" + resource_id + "&q="+area
                 carparkInfoJson2 = Functions.getOutput(carparkinfo2)
                 result = carparkInfoJson2['result']
-                recordList = result['records']
+                record_list = result['records']
 
             filter_type = False
 
@@ -190,44 +301,44 @@ class Ui_MainWindow(object):
             else:
                 filter_free = False
 
-            listOfCarparkData = Functions.getAllCarparkAvail()
+            list_of_carpark_data = Functions.getAllCarparkAvail()
 
             if len(carparkType) > 4:
                 filter_type = True
 
 
             if filter_type or filter_free:
-                filterList = []
+                filter_list = []
 
-                for carpark in recordList:
-                    cpType = carpark["car_park_type"]
-                    cpFree = carpark["free_parking"]
+                for carpark in record_list:
+                    cp_type = carpark["car_park_type"]
+                    cp_free = carpark["free_parking"]
 
                     if filter_type and filter_free:
-                        if (filter_free and cpFree != "NO") and (len(carparkType) > 4 and carparkType == cpType):
-                            filterList.append(carpark)
+                        if (filter_free and cp_free != "NO") and (len(carparkType) > 4 and carparkType == cp_type):
+                            filter_list.append(carpark)
 
                     elif filter_type:
-                        if len(carparkType) > 4 and carparkType == cpType:
-                            filterList.append(carpark)
+                        if len(carparkType) > 4 and carparkType == cp_type:
+                            filter_list.append(carpark)
 
                     elif filter_free:
-                        if filter_free and cpFree != "NO":
-                            filterList.append(carpark)
+                        if filter_free and cp_free != "NO":
+                            filter_list.append(carpark)
 
-                recordList = filterList
+                record_list = filter_list
 
-            for carpark in recordList:
+            for carpark in record_list:
 
                 cpNo = carpark['car_park_no']
-                availStatus = Functions.getCarparkAvail(listOfCarparkData, cpNo)
+                avail_status = Functions.getCarparkAvail(list_of_carpark_data, cpNo)
 
-                if (availStatus != None):
-                    carpark['Total Lots'] = availStatus[0]['total_lots']
-                    carpark['Lot Type'] = availStatus[0]['lot_type']
-                    carpark['Lot Available'] = availStatus[0]['lots_available']
+                if avail_status != None:
+                    carpark['Total Lots'] = avail_status[0]['total_lots']
+                    carpark['Lot Type'] = avail_status[0]['lot_type']
+                    carpark['Lot Available'] = avail_status[0]['lots_available']
 
-            dataframe = pandas.json_normalize(recordList)
+            dataframe = pandas.json_normalize(record_list)
 
             if area != "":
                 dataframe = dataframe.set_axis(
@@ -292,3 +403,46 @@ class Ui_MainWindow(object):
             msg.setInformativeText('Invalid Input')
             msg.setWindowTitle("Error")
             msg.exec_()
+
+    def accept3(self):
+        try:
+            result = carparkInfoJson['result']
+            recordList = result['records']
+
+            surface_carparks = 0
+            not_free_carparks = 0
+
+            for carpark in recordList:
+                cp_type = carpark["car_park_type"]
+                cp_free = carpark["free_parking"]
+
+                if cp_free == "NO":
+                    not_free_carparks += 1
+
+                if cp_type == "SURFACE CAR PARK":
+                    surface_carparks += 1
+
+            shelter_carparks = maxLimit - surface_carparks
+            free_carparks = maxLimit - not_free_carparks
+
+            sheltered_percentage = (shelter_carparks/maxLimit)* 100
+            free_percentage = (free_carparks/maxLimit)* 100
+
+            _translate = QtCore.QCoreApplication.translate
+            self.text_label_11.setText(_translate("MainWindow", "{}".format(surface_carparks)))
+            self.text_label_12.setText(_translate("MainWindow", "{}".format(shelter_carparks)))
+            self.text_label_13.setText(_translate("MainWindow", "{0:.1f}%".format(sheltered_percentage)))
+            self.text_label_14.setText(_translate("MainWindow", "{}".format(free_carparks)))
+            self.text_label_15.setText(_translate("MainWindow", "{}".format(not_free_carparks)))
+            self.text_label_16.setText(_translate("MainWindow", "{0:.1f}%".format(free_percentage)))
+
+        except:
+
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Critical)
+            msg.setText("Error")
+            msg.setInformativeText('Error retrieving results')
+            msg.setWindowTitle("Error")
+            msg.exec_()
+
+
